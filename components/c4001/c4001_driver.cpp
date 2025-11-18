@@ -22,16 +22,14 @@ Driver::~Driver() {
 esp_err_t Driver::init(const UartConfig &config) {
   port_ = config.port;
 
-  uart_config_t uart_config = {
-      .baud_rate = config.baud_rate,
-      .data_bits = config.data_bits,
-      .parity = config.parity,
-      .stop_bits = config.stop_bits,
-      .flow_ctrl = config.flow_ctrl,
-      .rx_flow_ctrl_thresh = 0,
-      .source_clk = UART_SCLK_DEFAULT,
-      .flags = 0,
-  };
+  uart_config_t uart_config{};
+  uart_config.baud_rate = config.baud_rate;
+  uart_config.data_bits = config.data_bits;
+  uart_config.parity = config.parity;
+  uart_config.stop_bits = config.stop_bits;
+  uart_config.flow_ctrl = config.flow_ctrl;
+  uart_config.rx_flow_ctrl_thresh = 0;
+  uart_config.source_clk = UART_SCLK_DEFAULT;
 
   ESP_RETURN_ON_ERROR(uart_param_config(port_, &uart_config), kTag, "param config failed");
   ESP_RETURN_ON_ERROR(uart_set_pin(port_, config.tx_io_num, config.rx_io_num, UART_PIN_NO_CHANGE,
