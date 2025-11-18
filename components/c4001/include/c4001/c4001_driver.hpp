@@ -15,8 +15,8 @@ namespace c4001 {
 
 struct UartConfig {
   uart_port_t port = UART_NUM_1;
-  int tx_io_num = 17;
-  int rx_io_num = 16;
+  int tx_io_num = 2;
+  int rx_io_num = 3;
   int baud_rate = 115200;
   uart_word_length_t data_bits = UART_DATA_8_BITS;
   uart_parity_t parity = UART_PARITY_DISABLE;

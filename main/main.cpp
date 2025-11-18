@@ -47,8 +47,8 @@ void event_consumer(void *ctx) {
 extern "C" void app_main(void) {
   c4001::UartConfig config;
   config.port = UART_NUM_1;
-  config.tx_io_num = 17;
-  config.rx_io_num = 16;
+  config.tx_io_num = 2;
+  config.rx_io_num = 3;
   config.baud_rate = 115200;
 
   static c4001::Service service;
