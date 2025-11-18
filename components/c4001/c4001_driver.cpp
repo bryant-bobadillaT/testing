@@ -30,6 +30,7 @@ esp_err_t Driver::init(const UartConfig &config) {
       .flow_ctrl = config.flow_ctrl,
       .rx_flow_ctrl_thresh = 0,
       .source_clk = UART_SCLK_DEFAULT,
+      .flags = 0,
   };
 
   ESP_RETURN_ON_ERROR(uart_param_config(port_, &uart_config), kTag, "param config failed");
