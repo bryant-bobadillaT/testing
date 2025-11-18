@@ -30,3 +30,21 @@ The ESP32-C5 example assumes the mmWave module is connected to UART1 on GPIO2/GP
 4. Leave RTS/CTS unconnected; the driver uses 3-wire UART without hardware flow control.
 
 With this wiring in place, the out-of-the-box configuration in `main/main.cpp` will match your hardware and no additional code changes are required.
+
+## Testing the firmware
+
+Once the ESP-IDF toolchain is installed (per Espressif's Linux guide) you can exercise the sample end-to-end without touching the source code:
+
+1. Source the environment and build for the ESP32-C5 target:
+   ```bash
+   . $IDF_PATH/export.sh
+   idf.py set-target esp32c5
+   idf.py build
+   ```
+2. Plug in your dev board, note the serial port (for example `/dev/ttyACM0`), and then flash + monitor:
+   ```bash
+   idf.py -p /dev/ttyACM0 flash monitor
+   ```
+3. After the reboot banner you should see log lines such as `c4001_service: presence=1 heartbeat=72`. Those messages confirm the UART driver, FreeRTOS polling task, and parser are all functioning against the mmWave module.
+
+If the build step fails with `driver/uart.h: No such file or directory`, ensure you're running inside the ESP-IDF environment; that header is provided by the `esp_driver_uart` component that becomes available only after sourcing `export.sh`.
